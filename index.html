@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="tailwind.min.css">
+</head>
+<body>
+  <div class="p-4">
+    <div class="flex mb-4">
+      <div>
+        <p>map:</p>
+        <div id="map"></div>
+      </div>
+
+      <div class="ml-4">
+        <p>exits:</p>
+        <div id="exits"></div>
+      </div>
+    </div>
+
+    <div class="flex border">
+      <p>current position:</p>
+      <div id="player"></div>
+    </div>
+
+    <div class="flex border">
+      <p>current room:</p>
+      <div id="currentRoom"></div>
+    </div>
+
+    <div class="flex border">
+      <p>actions:</p>
+      <div id="actions"></div>
+    </div>
+  </div>
+
+  <!-- Globals -->
+  <script src="helpers.js"></script>
+
+  <!-- Data -->
+  <script src="models/room-type.js"></script>
+  <script src="databases/room-types.js"></script>
+  <script src="models/room.js"></script>
+  <script src="databases/rooms.js"></script>
+  <script src="models/map.js"></script>
+  <script src="databases/maps.js"></script>
+  <script src="models/character.js"></script>
+  <script src="game.js"></script>
+  <script src="item.js"></script>
+
+  <!-- Engine -->
+  <script src="engine/ui.js"></script>
+  <script src="engine/renderer.js"></script>
+  <script src="engine/controller.js"></script>
+
+  <script src="index.js"></script>
+</body>
+</html>

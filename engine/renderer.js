@@ -95,11 +95,32 @@ Renderer.prototype.renderActions = function(ui){
   const game = this.game
 
   if(game.currentRoom){
-    for (let index = 0; index < game.currentRoom.items.length; index++) {
-      const item = game.currentRoom.items[index];
-      el('actions').innerHTML += `<button onclick="openItem(${item.id})">open ${item.name}</button>`
+    if(game.currentRoom.items.length > 0){
+      // Loop through items
+      for (let index = 0; index < game.currentRoom.items.length; index++) {
+        const item = game.currentRoom.items[index];
+        // console.log(item)
+
+        // Check if a box
+        if(item.decryptable){
+          el('actions').innerHTML += `<button class="bg-blue-300 controller-item" data-id="${item.id}">open ${item.name}</button>`
+        }
+      }
     }
   }
+}
+
+Renderer.prototype.renderBox = function(box){
+  console.log(box)
+  const ui = el('boxprompt')
+  ui.className += 'border p-2 text-center'
+  ui.innerHTML += box.name+'<br>'
+  ui.innerHTML += box.password+'<br>'
+  let input = document.createElement('input')
+  input.focus()
+  ui.appendChild(input)
+  // ui.innerHTML += '<input autofocus class="border" type="text"/><br>'
+  ui.innerHTML += '<br>todo: press enter to submit<br>'
 }
 
 Renderer.prototype.render = function(){

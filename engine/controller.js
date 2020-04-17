@@ -15,6 +15,7 @@ class Controller {
 
   activateExits() {
     let controllerExits = document.getElementsByClassName('controller-exit')
+
     if(controllerExits.length > 0){
       for (let index = 0; index < controllerExits.length; index++) {
         const element = controllerExits[index];
@@ -25,6 +26,27 @@ class Controller {
           this.game.update()
           this.renderer.render()
           this.activateExits()
+          this.activateItems()
+        })
+      }
+    }
+  }
+
+  activateItems() {
+    let controllerItems = document.getElementsByClassName('controller-item')
+    console.log(controllerItems.length)
+    if(controllerItems.length > 0){
+      for (let index = 0; index < controllerItems.length; index++) {
+        const element = controllerItems[index];
+        console.log(element)
+
+        element.addEventListener('click', (e) => {
+          const id = e.target.dataset.id
+          const item = this.game.currentRoom.items.filter(x => x.id == id)[0]
+
+          if(item.decryptable){
+            this.renderer.renderBox(item)
+          }
         })
       }
     }

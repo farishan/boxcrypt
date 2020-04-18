@@ -57,18 +57,49 @@ Renderer.prototype.renderMap = function(map, player, ui){
 Renderer.prototype.renderExits = function(game, ui){
   this.resetUI(ui)
 
-  for (var k in game.currentExits) {
-    const element = game.currentExits[k];
-    const html = `<a href="#" class="controller-exit" data-target="${element}">${k}</a> `
-    if(element){
-      ui.innerHTML += html
-    }else{
-      if(element >= 0){
-        if(k === 'nw' || k === 'n' || k === 'w'){
-          ui.innerHTML += html
+  const buttonMap = [
+    'nw', 'n', 'ne',
+    'w', null, 'e',
+    'sw', 's', 'se'
+  ]
+  const size = 25; // px
+
+  for (let index = 0; index < buttonMap.length; index++) {
+    let classes = "block border text-center "
+    let button = document.createElement('a')
+    button.setAttribute('href', '#')
+    button.style = `width: ${size}px; height: ${size}px`
+    let valid = false
+
+    const direction = buttonMap[index];
+    button.innerHTML = direction
+
+    if(direction !== null){
+      const position = game.currentExits[direction];
+
+      if(position > -1){
+        if(position > 0){
+          valid = true
+        }else{
+          if(
+            direction === 'nw' ||
+            direction === 'n' ||
+            direction === 'w'){
+            valid = true
+          }
         }
+
+        button.dataset.target = position
       }
+
+      classes += valid ? ' controller-exit' : ' opacity-25'
+      button.className = classes
     }
+
+    ui.appendChild(button)
+
+    // New line
+    if((index+1)%3 === 0) ui.innerHTML += '<div class="w-full"></div>'
   }
 }
 

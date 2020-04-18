@@ -16,7 +16,6 @@ class Controller {
         const element = controllerExits[index];
 
         element.addEventListener('click', (e) => {
-          console.log(e)
           const position = e.target.dataset.target
           game.player.move(parseInt(position))
           game.update()
@@ -30,11 +29,10 @@ class Controller {
 
   activateItems(game) {
     let controllerItems = document.getElementsByClassName('controller-item')
-    console.log(controllerItems.length)
+
     if(controllerItems.length > 0){
       for (let index = 0; index < controllerItems.length; index++) {
         const element = controllerItems[index];
-        console.log(element)
 
         this.activateItem(element, game)
       }
@@ -63,8 +61,6 @@ class Controller {
       i.focus()
       i.onkeydown = function(e){
         if(e.keyCode == 13){
-          console.log(i.value)
-
           // check inputed password
           if(i.value == item.password){
             item.open()

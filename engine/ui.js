@@ -9,3 +9,4 @@ const UI = {
 
 // Base Styling
 UI.map.className += "border p-2 inline-block"
+UI.exits.className += "flex flex-wrap space-between"

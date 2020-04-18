@@ -1,14 +1,4 @@
-/* CONFIG
--------------------- */
-var renderer = new Renderer()
-var controller = new Controller()
-var player = new Character(4) // @param position: choose from map
-var map = _maps[0] // Get map from database
-var game = new Game({ player, map, controller, renderer})
-
-/* START HERE
--------------------- */
-window.onload = function(){
+function _start(){
   game.init()
   game.update()
 
@@ -19,11 +9,22 @@ window.onload = function(){
   game.putItem(cbox1, 7)
   // console.log(game)
 
-  renderer.render(game);
-
   // !IMPORTANT: controller must be init after render
+  renderer.render(game);
   controller.init(game)
 }
+
+/* CONFIG
+-------------------- */
+var renderer = new Renderer()
+var controller = new Controller()
+var player = new Character(4) // @param position: choose from map
+var map = _maps[0] // Get map from database
+var game = new Game({ player, map, controller, renderer})
+
+/* START HERE
+-------------------- */
+window.onload = _start
 
 /* FUNCTIONS
 -------------------- */

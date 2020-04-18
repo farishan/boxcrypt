@@ -158,5 +158,14 @@ Renderer.prototype.render = function(game){
     this.renderExits(game, UI.exits)
     this.renderActions(game, UI.actions)
     this.renderMap(game.map, game.player, UI.map)
+    this.log()
   }
+}
+
+Renderer.prototype.log = function(){
+  const div = document.createElement('div')
+  div.className = 'p-2 border mb-2'
+  div.innerHTML = JSON.stringify(game.currentRoom)
+  UI.log.appendChild(div)
+  UI.log.scrollTop = UI.log.scrollHeight
 }

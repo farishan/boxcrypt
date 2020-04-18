@@ -8,36 +8,45 @@
 </head>
 <body>
   <div class="p-4">
-    <div class="flex mb-4">
-      <div>
-        <p>map:</p>
-        <div id="map"></div>
+    <div class="flex border -mx-4">
+      <!-- Info -->
+      <div class="w-10/12 mx-4">
+        <div id="log" class="h-64 overflow-y-auto mb-8"></div>
+
+        <div class="flex border">
+          <p>current position:</p>
+          <div id="player"></div>
+        </div>
+
+        <div class="flex border">
+          <p>current room:</p>
+          <div id="currentRoom"></div>
+        </div>
+
+        <div class="flex border">
+          <p>actions:</p>
+          <div id="actions"></div>
+        </div>
+
+        <div class="flex border">
+          <div id="boxprompt"></div>
+        </div>
       </div>
 
-      <div class="ml-4">
-        <p>exits:</p>
-        <div id="exits"></div>
+      <!-- Control -->
+      <div class="w-2/12 mx-4">
+        <div class="hidden">
+          <p>map:</p>
+          <div id="map"></div>
+        </div>
+
+        <div>
+          <p>exits:</p>
+          <div id="exits"></div>
+        </div>
       </div>
     </div>
 
-    <div class="flex border">
-      <p>current position:</p>
-      <div id="player"></div>
-    </div>
-
-    <div class="flex border">
-      <p>current room:</p>
-      <div id="currentRoom"></div>
-    </div>
-
-    <div class="flex border">
-      <p>actions:</p>
-      <div id="actions"></div>
-    </div>
-
-    <div class="flex border">
-      <div id="boxprompt"></div>
-    </div>
   </div>
 
   <!-- Globals -->

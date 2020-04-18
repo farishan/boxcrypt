@@ -1,17 +1,11 @@
-// question: harusnya renderer masukin ke game atau game masukin ke renderer?
-// answer: sementara game yang dimasukin ke renderer
-
 /*
- * @dependencies game, UI
- *
  * Renderer bertugas menampilkan data game ke UI.
+ * PURE CLASS, NO DEPENDECIES
+ * semua lewat param
  */
 
 class Renderer {
-  constructor(game, UI){
-    this.game = game
-    this.UI = UI
-  }
+  constructor(){}
   /*
    * Map Renderer
    *
@@ -31,11 +25,11 @@ class Renderer {
 /*
  * @param ui: Map UI DOM Element
  */
-Renderer.prototype.renderMap = function(ui){
+Renderer.prototype.renderMap = function(map, player, ui){
   this.resetUI(ui)
 
-  const { position } = this.game.player
-  const { width, data } = this.game.map
+  const { position } = player
+  const { width, data } = map
 
   let counter = 0;
   for (let index = 0; index < data.length; index++) {
@@ -60,9 +54,8 @@ Renderer.prototype.renderMap = function(ui){
   }
 }
 
-Renderer.prototype.renderExits = function(ui){
+Renderer.prototype.renderExits = function(game, ui){
   this.resetUI(ui)
-  const game = this.game
 
   for (var k in game.currentExits) {
     const element = game.currentExits[k];
@@ -79,20 +72,18 @@ Renderer.prototype.renderExits = function(ui){
   }
 }
 
-Renderer.prototype.renderPlayer = function(ui){
+Renderer.prototype.renderPlayer = function(player, ui){
   this.resetUI(ui)
-
   ui.innerHTML = JSON.stringify(player)
 }
 
-Renderer.prototype.renderCurrentRoom = function(ui){
+Renderer.prototype.renderRoom = function(room, ui){
   this.resetUI(ui)
-  ui.innerHTML = JSON.stringify(this.game.currentRoom)
+  ui.innerHTML = JSON.stringify(room)
 }
 
-Renderer.prototype.renderActions = function(ui){
+Renderer.prototype.renderActions = function(game, ui){
   this.resetUI(ui)
-  const game = this.game
 
   if(game.currentRoom){
     if(game.currentRoom.items.length > 0){
@@ -110,24 +101,31 @@ Renderer.prototype.renderActions = function(ui){
   }
 }
 
-Renderer.prototype.renderBox = function(box){
-  console.log(box)
-  const ui = el('boxprompt')
+Renderer.prototype.renderBox = function(box, ui, cb){
+  // Render box after user click open
+  // console.log(box)
+
+  // Init the boxprompt element
   ui.className += 'border p-2 text-center'
   ui.innerHTML += box.name+'<br>'
   ui.innerHTML += box.password+'<br>'
+
+  // Create password input
   let input = document.createElement('input')
-  input.focus()
+  let inputId = 'input_'+box.id
+  input.setAttribute('id', inputId)
+  input.className += 'border'
   ui.appendChild(input)
-  // ui.innerHTML += '<input autofocus class="border" type="text"/><br>'
-  ui.innerHTML += '<br>todo: press enter to submit<br>'
+
+  cb(inputId)
 }
 
-Renderer.prototype.render = function(){
-  const UI = this.UI
-  this.renderPlayer(UI.player)
-  this.renderCurrentRoom(UI.currentRoom)
-  this.renderExits(UI.exits)
-  this.renderActions(UI.actions)
-  this.renderMap(UI.map)
+Renderer.prototype.render = function(game){
+  if(game){
+    this.renderPlayer(game.player, UI.player)
+    this.renderRoom(game.currentRoom, UI.currentRoom)
+    this.renderExits(game, UI.exits)
+    this.renderActions(game, UI.actions)
+    this.renderMap(game.map, game.player, UI.map)
+  }
 }

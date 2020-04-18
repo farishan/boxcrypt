@@ -4,6 +4,7 @@ const UI = {
   player: el('player'),
   currentRoom: el('currentRoom'),
   actions: el('actions'),
+  boxprompt: el('boxprompt'),
 }
 
 // Base Styling

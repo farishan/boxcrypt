@@ -5,6 +5,7 @@
 class Character {
   constructor(position){
     this.position = position
+    this.score = 0
   }
 
   move(newPosition) {

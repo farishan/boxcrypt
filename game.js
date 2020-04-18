@@ -6,9 +6,18 @@ map
 */
 class Game {
   constructor(config){
-    const { player, map } = config
+    const {
+      player,
+      map,
+      controller,
+      renderer
+    } = config
+
     this.player = player
     this.map = map
+    this.renderer = renderer
+    this.controller = controller
+
     this.currentRoom = {}
     this.currentExits = {}
   }

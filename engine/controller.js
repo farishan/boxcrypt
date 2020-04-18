@@ -65,10 +65,12 @@ class Controller {
           if(i.value == item.password){
             item.open()
             game.player.score++
+            item.destroy(game)
             game.renderer.resetUI(UI.boxprompt)
             game.renderer.render(game)
             _this.activateExits(game)
             _this.activateItems(game)
+            game.generateBox(game.currentRoom.getIndex(game))
           }
         }
       }

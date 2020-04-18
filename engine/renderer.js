@@ -38,6 +38,13 @@ Renderer.prototype.renderMap = function(map, player, ui){
 
     this.stylize(tile)
 
+    // dev only
+    // show room with box in map
+    // console.log(map.rooms[index].items)
+    // if(map.rooms[index].items && map.rooms[index].items.length > 0){
+    //   tile.style.color = 'green'
+    // }
+
     if(index == position) {
       tile.style.color = 'red'
     }

@@ -2,12 +2,7 @@ function _start(){
   game.init()
   game.update()
 
-  // Manually create item an put it in a room
-  let cbox1 = new Cbox()
-  cbox1.id = 1
-  // console.log(cbox1)
-  game.putItem(cbox1, 7)
-  // console.log(game)
+  game.generateBox(-1)
 
   // !IMPORTANT: controller must be init after render
   renderer.render(game);

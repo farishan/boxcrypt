@@ -28,6 +28,17 @@ class Room {
   populate(data) {
     this.type = data[this.typeId]
   }
+
+  getIndex(game){
+    let _index = -1
+    for (let index = 0; index < game.map.rooms.length; index++) {
+      const room = game.map.rooms[index];
+      if(room.id == this.id){
+        _index = index
+      }
+    }
+    return _index
+  }
 }
 
 /* USAGE

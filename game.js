@@ -82,4 +82,25 @@ class Game {
       room.items.push(item)
     }
   }
+
+  generateBox(lastIndex) {
+    console.log('lastindex:', lastIndex)
+    let index = -1
+    let room = 0
+
+    // Dont generate on empty map tile and last room,
+    // must be generated on valid and new
+    while(room === 0 || index === lastIndex){
+      let random = Math.floor(Math.random()*this.map.rooms.length)
+      index = random
+      room = this.map.rooms[index]
+    }
+
+    // Manually create item an put it in a room
+    let cbox1 = new Cbox()
+    cbox1.id = 1
+    // console.log(cbox1)
+    game.putItem(cbox1, index)
+    // console.log(game)
+  }
 }

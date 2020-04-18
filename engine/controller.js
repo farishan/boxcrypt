@@ -6,6 +6,7 @@ class Controller {
 
   init(game){
     this.activateExits(game)
+    this.activateItems(game)
   }
 
   activateExits(game) {
@@ -46,6 +47,7 @@ class Controller {
       const item = game.currentRoom.items.filter(x => x.id == id)[0]
 
       if(item.decryptable){
+        element.disabled = true
         game.renderer.renderBox(item, UI.boxprompt, function(id){
           _this.activateInput(id, item, game)
         })
@@ -66,10 +68,14 @@ class Controller {
             item.open()
             game.player.score++
             item.destroy(game)
+
             game.renderer.resetUI(UI.boxprompt)
             game.renderer.render(game)
+            game.renderer.log('opened a box')
+
             _this.activateExits(game)
             _this.activateItems(game)
+
             game.generateBox(game.currentRoom.getIndex(game))
           }
         }

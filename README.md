@@ -11,5 +11,7 @@ Better version of [Movement](https://github.com/farishan/movement)
 ---
 
 ## Todo
-[ ] Change map to 2d array
-[ ] Typing mechanic
+- [ ] ~~Change map to 2d array~~
+- [X] Typing mechanic
+- [ ] Styling boxprompt
+- [ ] Advance box password

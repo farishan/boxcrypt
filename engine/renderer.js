@@ -69,7 +69,7 @@ Renderer.prototype.renderExits = function(game, ui){
     'w', null, 'e',
     'sw', 's', 'se'
   ]
-  const size = 25; // px
+  const size = _config.tileSize;
 
   for (let index = 0; index < buttonMap.length; index++) {
     let classes = "block border text-center "
@@ -112,7 +112,8 @@ Renderer.prototype.renderExits = function(game, ui){
 
 Renderer.prototype.renderPlayer = function(player, ui){
   this.resetUI(ui)
-  ui.innerHTML = JSON.stringify(player)
+  // ui.innerHTML = JSON.stringify(player)
+  ui.innerHTML = ' '+player.score
 }
 
 Renderer.prototype.renderRoom = function(room, ui){
@@ -132,7 +133,7 @@ Renderer.prototype.renderActions = function(game, ui){
 
         // Check if a box
         if(item.decryptable){
-          el('actions').innerHTML += `<button class="bg-blue-300 controller-item" data-id="${item.id}">open ${item.name}</button>`
+          el('actions').innerHTML += `<button class="bg-blue-300 controller-item px-2" data-id="${item.id}">open ${item.name}</button>`
         }
       }
     }
@@ -144,15 +145,15 @@ Renderer.prototype.renderBox = function(box, ui, cb){
   // console.log(box)
 
   // Init the boxprompt element
-  ui.className += 'border p-2 text-center'
-  ui.innerHTML += box.name+'<br>'
-  ui.innerHTML += box.password+'<br>'
+  ui.className += 'border p-2 text-center text-sm bg-yellow-300'
+  ui.innerHTML += '<b>'+box.name+'</b><br>'
+  ui.innerHTML += 'type this: <pre style="margin-bottom: 0">' + box.password+'</pre>and press enter key<br>'
 
   // Create password input
   let input = document.createElement('input')
   let inputId = 'input_'+box.id
   input.setAttribute('id', inputId)
-  input.className += 'border'
+  input.className += 'border my-2 p-2 text-center'
   ui.appendChild(input)
 
   cb(inputId)
@@ -160,19 +161,26 @@ Renderer.prototype.renderBox = function(box, ui, cb){
 
 Renderer.prototype.render = function(game){
   if(game){
+    this.resetUI(UI.boxprompt)
     this.renderPlayer(game.player, UI.player)
     this.renderRoom(game.currentRoom, UI.currentRoom)
     this.renderExits(game, UI.exits)
     this.renderActions(game, UI.actions)
     this.renderMap(game.map, game.player, UI.map)
-    this.log()
+
+    let html = game.currentRoom.name + ' | ' + game.currentRoom.type.name + ' | '
+    html += game.currentRoom.description
+    this.log(html)
+
+    // dynamic map width
+    UI.map.style = `width: ${_config.tileSize*game.map.width}px;`
   }
 }
 
-Renderer.prototype.log = function(){
+Renderer.prototype.log = function(text){
   const div = document.createElement('div')
   div.className = 'p-2 border mb-2'
-  div.innerHTML = JSON.stringify(game.currentRoom)
+  div.innerHTML = text
   UI.log.appendChild(div)
   UI.log.scrollTop = UI.log.scrollHeight
 }

@@ -5,7 +5,7 @@ function _start(){
   game.generateBox(-1)
 
   // !IMPORTANT: controller must be init after render
-  renderer.render(game);
+  renderer.render(game)
   controller.init(game)
 }
 

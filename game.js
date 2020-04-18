@@ -99,6 +99,8 @@ class Game {
     // Manually create item an put it in a room
     let cbox1 = new Cbox()
     cbox1.id = 1
+    cbox1.name = 'Silver Box'
+    cbox1.password = 'asdfjkl;'
     // console.log(cbox1)
     game.putItem(cbox1, index)
     // console.log(game)
